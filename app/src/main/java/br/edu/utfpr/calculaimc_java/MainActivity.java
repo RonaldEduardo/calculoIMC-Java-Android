@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnCalcular.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(MainActivity.this, "Botão de calcular", Toast.LENGTH_SHORT).show();
+                return true; // usando true para nao caracterizar o evento de click na sequencia
+            }
+        });
+
         btnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,27 +57,32 @@ public class MainActivity extends AppCompatActivity {
         String pesoStr = etPeso.getText().toString();
         String alturaStr = etAltura.getText().toString();
 
-        if (!pesoStr.isEmpty() && !alturaStr.isEmpty()) {
-            double peso = Double.parseDouble(pesoStr);
-            double altura = Double.parseDouble(alturaStr);
-            double imc = peso / (altura * altura);
-
-            String classificacao;
-            if (imc < 18.5) {
-                classificacao = "Abaixo do peso";
-            } else if (imc < 24.9) {
-                classificacao = "Peso normal";
-            } else if (imc < 29.9) {
-                classificacao = "Sobrepeso";
-            } else {
-                classificacao = "Obesidade";
-            }
-
-            String resultado = String.format("%.2f\n%s", imc, classificacao);
-            tvResultado.setText(resultado);
-        } else {
-            tvResultado.setText("Por favor, preencha todos os campos.");
+        if (alturaStr.isEmpty()) {
+            etAltura.setError("Altura deve ser preenchida!!");
+            return;
         }
+
+        if(pesoStr.isEmpty()) {
+            etPeso.setError("Peso deve ser preenchiso!");
+            return;
+        }
+        double peso = Double.parseDouble(pesoStr);
+        double altura = Double.parseDouble(alturaStr);
+        double imc = peso / (altura * altura);
+
+        String classificacao;
+        if (imc < 18.5) {
+            classificacao = "Abaixo do peso";
+        } else if (imc < 24.9) {
+            classificacao = "Peso normal";
+        } else if (imc < 29.9) {
+            classificacao = "Sobrepeso";
+        } else {
+            classificacao = "Obesidade";
+        }
+
+        String resultado = String.format("%.2f\n%s", imc, classificacao);
+        tvResultado.setText(resultado);
     }
 
     public void clearField(){

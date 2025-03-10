@@ -32,6 +32,8 @@
         android:hint="Altura em Metros"
         android:inputType="numberDecimal"
         />
+        <!-- o @ significa o diretorio res, e o + esta adicionando um id novo no diretorio,
+             sendo possivel se acessado nos arquivos java e kT  -->
 
     <TextView
         android:layout_width="wrap_content"
