@@ -27,11 +27,19 @@ public class MainActivity extends AppCompatActivity {
         etAltura = findViewById(R.id.etAltura);
         tvResultado = findViewById(R.id.tvResultado);
         Button btnCalcular = findViewById(R.id.btnCalcular);
+        Button btnLimpar = findViewById(R.id.btnLimpar);
 
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 calcularIMC();
+            }
+        });
+
+        btnLimpar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearField();
             }
         });
     }
@@ -61,5 +69,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             tvResultado.setText("Por favor, preencha todos os campos.");
         }
+    }
+
+    public void clearField(){
+        etPeso.setText("");
+        etAltura.setText("");
+        tvResultado.setText("0.0");
     }
 }
